@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">  
+<title>xxxxxxxxxxxxx</title> 
+   <link rel="stylesheet" href="./app_files/bootstrap.css">
+   <link href="./app_files/style.css" rel="stylesheet">
+   <link href="./app_files/cellPhone.css" rel="stylesheet">
+   <link href="./app_files/vipTeach.css" rel="stylesheet">
+   <link rel="stylesheet" href="./app_files/lay.css">
+   <link href="./app_files/layui.css" rel="stylesheet" media="all">
+<script type="text/javascript" src="https://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+   <script src="./app_files/bootstrap.min.js"></script>
+   <script src="./app_files/progress.js"></script>
+   <script type="text/javascript" src="./app_files/zepto.min.js"></script>
+   <script src="./app_files/layui.all.js"></script>
+   <link id="layuicss-layer" rel="stylesheet" href="./app_files/layer.css" media="all"> 
+   <script src="./app_files/NoSleep.js"></script>
+<style type="text/css">
+       a {
+           color: #8a8a8a;
+           text-decoration: none;
+           letter-spacing: 1px;
+       }
+	.install-tip-mask .first-step-image {
+	    background-repeat: no-repeat;
+	    background-size: 100% 100%;
+	    width: 250px;
+	    height: 63px;
+	    margin: 10px auto 0
+	}
+	.install-tip-mask .second-step-image{
+	    margin-top: 15px;
+	}
+	 #myModal .modal-dialog .modal-content .modal-body img{
+	width:20px;  
+	float: right;
+	margin-right: 35px;
+}
+    </style><style type="text/css">.mx-tip-panel:focus{outline:0;} 
+ .mx_keyword{line-height:20px; color:#333333; font-size:14px; letter-spacing: 0.2px;font-family:PingFangSC-Semibold;}
+.mx-scrollbar::-webkit-scrollbar{width:8px;height:1px;}
+.mx-scrollbar{overflow-y:auto; max-height:380px; }
+.mx-scrollbar::-webkit-scrollbar-thumb{border-radius:4px; background: #C0C0C0;}
+.mx-scrollbar::-webkit-scrollbar-track{border-radius:4px; background: #eeeeee;}
+.maxthon_tip{background-color:white; border:none;} .maxthon_tip:active{background-color: #E6F4FF;border:1px solid #449EFB; } .maxthon_tip:hover{background-color:#E6F4FF; border:1px solid #449EFB;}
+</style></head>
+
+<body>
+    <!-- 内容主体区域 -->
+    <div class="container">
+	    <div class="row tem">
+	        <div class="col-sm-12">
+	            <div id="old" class="weixin-QQ-tip">请点击右上角<br>选择“浏览器中打开”</div>
+	            <div class="vip-weixin-qq" style="display: none;">请点击右上角选择<br>“Safari浏览器打开”</div>
+			   <div class="logo">
+			       <img src="logo.png" class="logo" alt="">
+			   </div>
+			    <div class="typ">
+			       <span>xxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
+			   </div>
+			   <div class="fot">
+				   <h5>版本:&nbsp;1.0  </h5>
+				   	   <input type="button" value="点击下载" id="downloadIOS" onclick="is_weixn_qq()"  style="display: none;">
+				   	   <div id="Home" style="display: none;">正在安装,请按Home键查看</div>
+					   <input type="button" style="display: none;" value="安装中..." id="resigning">
+					   <input type="button" value="暂不支持此系统" id="notAgree" style="display: none;"> 
+					   <input type="button" value="正在安装" style="display: none;" id="beInstall">
+				
+			   </div>
+			    <div id="weixinAndQQ" style="display: none;">微信/QQ 内无法下载应用</div>
+	       </div>
+        </div>
+    </div>
+     
+     
+     <!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 80%; margin-left: 10%;margin-top: 250px;">
+			<div class="modal-body">
+				<div>配置文件中<img id="a" src="./app_files/greyRight.png" style="display: none;"><img id="a1" src="./app_files/blueRight.png"><img id="a2" src="./app_files/loading1.gif" style="display: none;"></div><br>
+				<div>校验中<img id="b" src="./app_files/greyRight.png" style="display: none;"><img id="b1" src="./app_files/blueRight.png" style="display: none;"><img id="b2" src="./app_files/loading1.gif"></div><br>
+				<div>正在下载<img id="c" src="./app_files/greyRight.png"><img id="c1" src="./app_files/blueRight.png" style="display: none;"><img id="c2" src="./app_files/loading1.gif" style="display: none;"></div><br>
+				<h4 style="color: #0098dd;text-align: center;">请不要离开此页面并保持屏幕常亮</h4>
+			</div>
+			</div>
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+var height=window.screen.height;
+var width = window.screen.width;
+//判断浏览器内核、手机系统等，使用 browser.version.ios
+var browser1 = {
+  version: function () {
+    var u = navigator.userAgent;
+    var ua = navigator.userAgent.toLocaleLowerCase();
+    var app = navigator.appVersion;
+    return {
+      trident: u.indexOf('Trident') > -1, // IE内核
+      presto: u.indexOf('Presto') > -1, // opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, // 火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), // 是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), // IOS终端
+      android: u.indexOf('Android') > -1 , // 安卓终端
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, // 是否为iphone或QQHD浏览器
+      iPad: u.indexOf('iPad') > -1, // 是否为iPad
+      webApp: u.indexOf('Safari') == -1, // 是否web应用程序，没有头部与底部
+      QQbrw: u.indexOf('MQQBrowser') > -1, // QQ浏览器
+      weiXin: u.indexOf('MicroMessenger') > -1, // 微信
+      QQ: ua.match(/QQ/i) == "qq", // QQ
+      weiBo: ua.match(/WeiBo/i) == "weibo", // 微博
+      ucLowEnd: u.indexOf('UCWEB7.') > -1, //
+      ucSpecial: u.indexOf('rv:1.2.3.4') > -1,
+      webview: !(u.match(/Chrome\/([\d.]+)/) || u.match(/CriOS\/([\d.]+)/)) && u.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/),
+      ucweb: function () {
+        try {
+          return parseFloat(u.match(/ucweb\d+\.\d+/gi).toString().match(/\d+\.\d+/).toString()) >= 8.2
+        } catch (e) {
+          if (u.indexOf('UC') > -1) {
+            return true;
+          }
+          return false;
+        }
+      }(),
+      Symbian: u.indexOf('Symbian') > -1,
+      ucSB: u.indexOf('Firofox/1.') > -1
+    };
+  }()
+};
+//暂时不支持安卓系统
+$(function() {
+debugger;
+	if (browser1.version.android || browser1.version.ios) { 
+		$("#downloadIOS").show();
+	}
+	else
+	{
+	 $("#downloadIOS").hide();
+	 $("#notAgree").show();
+	}
+})
+function is_weixn_qq(){
+	var ua = navigator.userAgent.toLowerCase();
+	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串 
+	if(ua.match(/MicroMessenger/i)=="micromessenger") {
+		$('.weixin-QQ-tip').show();
+		$('#download').hide();
+		$('#weixinAndQQ').show();
+	}else if (browser1.version.QQ && !browser1.version.QQbrw) {
+		$('.weixin-QQ-tip').show();
+		$('#download').hide();
+		$('#weixinAndQQ').show();
+	}else{
+			if (browser1.version.android) { 
+				downloadAndroid();
+			}
+			else if(browser1.version.ios)
+			{
+					var appName= '微信'
+					var qiyeName= 'XCMG Foundation Construction Machinery Co., Ltd.' 
+					var icon= 'logo.png'
+					var zhengshu= 'xxxxx.mobileprovision'
+					var barIcon= 'yunwei'
+					if (false) {
+						var winHeight = typeof window.innerHeight != "undefined" ? window.innerHeight : document.documentElement.clientHeight;
+						//兼容IOS，不需要的可以去掉
+						var tip = document.getElementById("weixin-tip");
+						var close = document.getElementById("close");
+						tip.style.height = winHeight + "px";
+						//兼容IOS弹窗整屏
+						tip.style.display = "block";
+						close.onclick = function () {
+							tip.style.display = "none";
+						}
+					} else { 
+						showTeach(); 
+					}
+			}
+			else
+			{
+			   
+			}
+			
+
+	}
+}
+ 
+function downloadAndroid() {
+	//$("#Home").show();
+	$("#download").hide();
+	window.location.href="xxxxxxxxxxxxxxxxxx.apk";
+}
+
+function download() {
+	$("#Home").show();
+	$("#download").hide();
+	window.location.href="88tvs.mobileconfig";
+}
+function showTeach(){
+	var teach_width =(width-315)/2;
+	var teach_height=(height-400)/3;
+	var content ='<div class="showT"><div id="myCarousel" class="carousel slide"  data-ride="carousel" data-interval="0">'
+					+'<ol class="carousel-indicators">'
+					+'<li data-target="#myCarousel" data-slide-to="0" class="active"></li>'
+					+'<li data-target="#myCarousel" data-slide-to="1"></li>'
+					+'<li data-target="#myCarousel" data-slide-to="2"></li>'
+					+'<li data-target="#myCarousel" data-slide-to="3"></li>'
+					content +='</ol>'   
+					+'<div class="carousel-inner">'
+					+'<div class="item active">'
+					+'<img src="./app_files/firstTeach.png" alt="First slide">'
+					+'<h3>第一步</h3>'
+					+'<h4>点击“<span>允许</span>”进行下一步操作。</h4>'
+					+'</div>'
+					+'<div class="item">'
+						content +='<img src="./app_files/secendTeach.png" alt="Second slide"/>'
+							+'<h3>第二步</h3>'
+							+'<h4>点击“<span>关闭</span>”弹窗，然后进行下一步操作。</h4>'
+							+'</div>'
+							+'<div class="item">'
+							+'<img src="./app_files/firstTeach.png" alt="Third slide">'
+							+'<h3>第三步</h3>'
+							+'<h4>点击“<span>允许</span>”,然后进行下一步操作。</h4>'
+							+'</div>'
+							+'<div class="item">'
+							+'<img src="./app_files/fouthTeach.png" alt="Fourth slide">'
+							+'<h3>第四步</h3>'
+							+'<h4>点击“<span>安装</span>”即可。</h4>'
+					content +='</div>'
+				        +'</div>'
+                        +'</div></div>'
+                        +'<div class="conti" onclick="contInstall()"> <img src="./app_files/continueInstall.png" alt="Fifth slide"></div>'
+	             layer.open({ 
+	 				type: 1,
+	 				title:false,
+	 				shade:0.2,
+	 				shadeClose:true,
+	 				closeBtn: 0,
+	 				offset: [teach_height,teach_width],
+	 				area: ['315px', '400px'], //宽高
+	 				content: content
+	 			});
+}
+function contInstall(){
+	window.location.href="88tvs.mobileconfig";
+	setTimeout( function(){
+		window.location.href='embedded.mobileprovision'
+		}, 2 * 1000 );//延
+}
+var startx;
+//手指接触屏幕
+document.addEventListener("touchstart", function(e){
+startx = e.touches[0].pageX;
+}, false);
+//手指离开屏幕
+document.addEventListener("touchend", function(e) {
+var endx;
+endx = e.changedTouches[0].pageX;
+var direction = endx - startx;;
+if (direction>0) {
+	  $('#myCarousel').carousel('prev')
+}else{
+	  $('#myCarousel').carousel('next')
+}
+}, false);
+</script>
+
+
+</body></html>
